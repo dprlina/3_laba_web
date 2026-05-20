@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load book_extras %}
+
+{% block title %}Список книг{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Каталог книг</h1>
+
+<div class="alert alert-info">
+    <strong>Встроенные теги/фильтры:</strong><br>
+    • {% now "d.m.Y H:i" %} — текущая дата (тег)<br>
+    • Книг: {{ books|length }} (фильтр length)<br>
+    • Демо: "{{ 'ПРИВЕТ'|lower }}" (фильтр lower)
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for book in books %}
+    <div class="col">
+        {% book_card book show_rating=True %}
+    </div>
+    {% empty %}
+    <div class="col-12">Книг пока нет</div>
+    {% endfor %}
+</div>
+{% endblock %}
